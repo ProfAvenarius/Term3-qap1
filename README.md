@@ -1,2 +1,2 @@
-QAP 1 for FullStack JavaScript in Term 3 for class SD12
+QAP 1 for FullStack JavaScript in Term 3 for class SD12 /n
 Password Generator CLI application developed in Node.js
