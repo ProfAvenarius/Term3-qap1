@@ -1,0 +1,15 @@
+{
+  "name": "qap1",
+  "version": "1.0.0",
+  "description": "QAP1 FullStack ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "qap",
+    "term3"
+  ],
+  "author": "DC Elliott",
+  "license": "MIT"
+}
