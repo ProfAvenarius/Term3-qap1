@@ -18,9 +18,11 @@ for (let i = 0; i < arguments.length; i++) {
         if (!pswdLength || isNaN(pswdLength)) {
             console.log("Enter a number after '--length' to indicate a different number of characters, use  --help for full instructions. ")
             pswdLength= 8;
+            i--; // Very proud of this, solves the issue of no number affecting other flags
         }
         argCheck = true;
-        break;
+        i++;
+        
     }else if (arguments[i] === '--help') {
         console.log("◀︎ _________________________________________________________ ▶︎")
         console.log("| WELCOME TO PASSWORD GENERATOR CLI MEGA SUPREME            |");
@@ -42,31 +44,37 @@ for (let i = 0; i < arguments.length; i++) {
         argCheck = true;
     }else if(arguments[i] === '--caps') {
         capitals = true;
+        
     }else if(arguments[i] === '--sym' ) {
         symbols = true;
+        
     }   
-    
-    else  {
-        console.log("This is not a valid command. Enter '--help' for instructions.")
+    else {
+        console.log(`"${arguments[i]}" is not a valid command. Enter '--help' for instructions.`)
     }
-}
-    
+};
+
 if (argCheck === false) {
     pswdLength= 8;
-}
+};
 
 if (pswdLength >= 3000001) {
-    console.log("The length specified is outside specifications, maximum value is 3,000,000.")  
+    console.log("Entry for length is too large, maximum number of characteros is 3000000")  
 }else {
     let pswdLengthNum = parseInt(pswdLength);
     for (let i=1; i<=pswdLengthNum; i++) {
-        let randAlpha = alpha[Math.floor(Math.random()*26)]
-        if (capitals = true) {
-            let fiftyFifty = Math.random()*100
-            if (fiftyFifty>50){
-                randAlpha = randAlpha.toUpperCase();
-            }
-        }
+        let randAlpha = "";
+        let quarterChance = Math.random()*100
+        if (symbols === true && quarterChance <20) {
+            randAlpha = signs[Math.floor(Math.random()*8)] 
+        }else {
+            randAlpha = alpha[Math.floor(Math.random()*26)]
+            if (capitals == true) {
+                let fiftyFifty = Math.random()*100
+                if (fiftyFifty>50){
+                    randAlpha = randAlpha.toUpperCase();
+                }
+            }}
         pswd = pswd.concat(randAlpha);
         
         
