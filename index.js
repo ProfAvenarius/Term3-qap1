@@ -49,8 +49,10 @@ for (let i = 0; i < arguments.length; i++) {
         console.log("|       of any character being a symbol '!,@,#,$,%,&,*,?'.  |"); 
         console.log("| '--num': Adds numbers to password, there is a 20% chance  |");
         console.log("|       of any character being of '1,2,3,4,5,6,7,8,9,0'.    |"); 
-        console.log("| Example: node index.js --length 20 --caps --sym --num     |");
-        console.log("|       returns:    |");
+        console.log("| Example: Entering the following command:                  |");
+        console.log("|       node index.js --length 20 --num --sym --caps        |");
+        console.log("|       returns:                                            |");
+        console.log("|       Your 20 character Password is: s?A%HeDij&8cBJzr8O3$ |");
         console.log("◀︎ _________________________________________________________ ▶︎")
         argCheck = true;
     }else if(arguments[i] === '--caps') {
