@@ -6,8 +6,11 @@ const process = require ("process");
 const arguments = process.argv.slice(2);
 let pswdLength = '';
 const alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+const signs = ['!','@','#','$','%','&','*','?']
 let pswd = "";
 let argCheck = false;
+let capitals = false;
+let symbols = false;
 
 for (let i = 0; i < arguments.length; i++) {
     if (arguments[i] === '--length' || !arguments[i]) {
@@ -36,12 +39,14 @@ for (let i = 0; i < arguments.length; i++) {
         console.log("|       Maximum number of characters avalable is 3,000,000. |");
         console.log("| '--help': returns instructions.                           |");
         console.log("◀︎ _________________________________________________________ ▶︎")
-    
-
-
-
         argCheck = true;
-    }else  {
+    }else if(arguments[i] === '--caps') {
+        capitals = true;
+    }else if(arguments[i] === '--sym' ) {
+        symbols = true;
+    }   
+    
+    else  {
         console.log("This is not a valid command. Enter '--help' for instructions.")
     }
 }
@@ -56,7 +61,14 @@ if (pswdLength >= 3000001) {
     let pswdLengthNum = parseInt(pswdLength);
     for (let i=1; i<=pswdLengthNum; i++) {
         let randAlpha = alpha[Math.floor(Math.random()*26)]
+        if (capitals = true) {
+            let fiftyFifty = Math.random()*100
+            if (fiftyFifty>50){
+                randAlpha = randAlpha.toUpperCase();
+            }
+        }
         pswd = pswd.concat(randAlpha);
+        
         
     }if (!pswd) {
         console.log("")
