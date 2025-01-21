@@ -2,7 +2,6 @@
 //Author: DC Elliott
 //Date: Jan 16-
 
-
 const process = require ("process");
 const arguments = process.argv.slice(2);
 let pswdLength = '';
@@ -14,6 +13,7 @@ for (let i = 0; i < arguments.length; i++) {
     if (arguments[i] === '--length' || !arguments[i]) {
         pswdLength = arguments[i+1];
         if (!pswdLength || isNaN(pswdLength)) {
+            console.log("Enter a number after '--length' to indicate a different number of characters, use  --help for full instructions. ")
             pswdLength= 8;
         }
         argCheck = true;
@@ -33,9 +33,10 @@ for (let i = 0; i < arguments.length; i++) {
         console.log("|       as specified by a trailing number, for a password   |");
         console.log("|       of 10 characters we would enter '--length 10'. If   |");
         console.log("|       no number is entered length defaults to 8.          |");
+        console.log("|       Maximum number of characters avalable is 3,000,000. |");
         console.log("| '--help': returns instructions.                           |");
         console.log("◀︎ _________________________________________________________ ▶︎")
-
+    
 
 
 
@@ -49,16 +50,19 @@ if (argCheck === false) {
     pswdLength= 8;
 }
 
-let pswdLengthNum = parseInt(pswdLength);
-
-for (let i=1; i<=pswdLengthNum; i++) {
-    let randAlpha = alpha[Math.floor(Math.random()*26)]
-    
-    pswd = pswd.concat(randAlpha);
-    
+if (pswdLength >= 3000001) {
+    console.log("The length specified is outside specifications, maximum value is 3,000,000.")  
+}else {
+    let pswdLengthNum = parseInt(pswdLength);
+    for (let i=1; i<=pswdLengthNum; i++) {
+        let randAlpha = alpha[Math.floor(Math.random()*26)]
+        pswd = pswd.concat(randAlpha);
+        
+    }if (!pswd) {
+        console.log("")
+        }else {
+        console.log(`Your ${pswdLength} character Password is: ${pswd}`)};
 }
-
-console.log(`Your ${pswdLength} character Password is: ${pswd}`);
 
 
 
