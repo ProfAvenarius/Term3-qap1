@@ -58,7 +58,7 @@ for (let i=1; i<=pswdLengthNum; i++) {
     
 }
 
-console.log(pswd);
+console.log(`Your ${pswdLength} character Password is: ${pswd}`);
 
 
 
