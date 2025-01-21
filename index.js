@@ -7,10 +7,12 @@ const arguments = process.argv.slice(2);
 let pswdLength = '';
 const alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 const signs = ['!','@','#','$','%','&','*','?']
+const digits = ['1','2','3','4','5','6','7','8','9','0']
 let pswd = "";
 let argCheck = false;
 let capitals = false;
 let symbols = false;
+let numbers = false;
 
 for (let i = 0; i < arguments.length; i++) {
     if (arguments[i] === '--length' || !arguments[i]) {
@@ -18,7 +20,7 @@ for (let i = 0; i < arguments.length; i++) {
         if (!pswdLength || isNaN(pswdLength)) {
             console.log("Enter a number after '--length' to indicate a different number of characters, use  --help for full instructions. ")
             pswdLength= 8;
-            i--; // Very proud of this, solves the issue of no number affecting other flags
+            i--; // Very proud of this, solves the issue of 'no number/not a number' case affecting other flags.
         }
         argCheck = true;
         i++;
@@ -40,14 +42,24 @@ for (let i = 0; i < arguments.length; i++) {
         console.log("|       no number is entered length defaults to 8.          |");
         console.log("|       Maximum number of characters avalable is 3,000,000. |");
         console.log("| '--help': returns instructions.                           |");
+        console.log("| (Advanced functions.)                                     |");
+        console.log("| '--caps': Adds capital letters to password, there is a    |");
+        console.log("|       50% chance of each character becoming uppercase.    |");   
+        console.log("| '--sym': Adds symbols to password, there is a 20% chance  |");
+        console.log("|       of any character being a symbol '!,@,#,$,%,&,*,?'.  |"); 
+        console.log("| '--num': Adds numbers to password, there is a 20% chance  |");
+        console.log("|       of any character being of '1,2,3,4,5,6,7,8,9,0'.    |"); 
+        console.log("| Example: node index.js --length 20 --caps --sym --num     |");
+        console.log("|       returns:    |");
         console.log("◀︎ _________________________________________________________ ▶︎")
         argCheck = true;
     }else if(arguments[i] === '--caps') {
         capitals = true;
         
-    }else if(arguments[i] === '--sym' ) {
+    }else if(arguments[i] === '--sym') {
         symbols = true;
-        
+    }else if(arguments[i] === '--num') {    
+        numbers = true;
     }   
     else {
         console.log(`"${arguments[i]}" is not a valid command. Enter '--help' for instructions.`)
@@ -66,9 +78,11 @@ if (pswdLength >= 3000001) {
         let randAlpha = "";
         let quarterChance = Math.random()*100
         if (symbols === true && quarterChance <20) {
-            randAlpha = signs[Math.floor(Math.random()*8)] 
+            randAlpha = signs[Math.floor(Math.random()*8)]; 
+        }else if (numbers === true && quarterChance>80) {
+            randAlpha = digits[Math.floor(Math.random()*10)];
         }else {
-            randAlpha = alpha[Math.floor(Math.random()*26)]
+            randAlpha = alpha[Math.floor(Math.random()*26)];
             if (capitals == true) {
                 let fiftyFifty = Math.random()*100
                 if (fiftyFifty>50){
