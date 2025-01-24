@@ -1,6 +1,6 @@
 //Desciption: QAP1 - Password Generator
 //Author: DC Elliott
-//Date: Jan 16-
+//Date: Jan 16-Jan 23, 2024
 
 const process = require ("process");
 const arguments = process.argv.slice(2);
@@ -17,7 +17,7 @@ let numbers = false;
 for (let i = 0; i < arguments.length; i++) {
     if (arguments[i] === '--length' || !arguments[i]) {
         pswdLength = arguments[i+1];
-        if (!pswdLength || isNaN(pswdLength)) {
+        if (!pswdLength || isNaN(pswdLength)) { //Covers case of length flag w/o a number
             console.log("Enter a number after '--length' to indicate a different number of characters, use  --help for full instructions. ")
             pswdLength= 8;
             i--; // Very proud of this, solves the issue of 'no number/not a number' case affecting other flags.
@@ -56,15 +56,13 @@ for (let i = 0; i < arguments.length; i++) {
         console.log("◀︎ _________________________________________________________ ▶︎")
         argCheck = true;
     }else if(arguments[i] === '--caps') {
-        capitals = true;
-        
+        capitals = true;  
     }else if(arguments[i] === '--sym') {
         symbols = true;
     }else if(arguments[i] === '--num') {    
         numbers = true;
-    }   
-    else {
-        console.log(`"${arguments[i]}" is not a valid command. Enter '--help' for instructions.`)
+    }else {
+        console.log(`"${arguments[i]}" is not a valid command. Enter '--help' for instructions.`); //identifies what flag has error
     }
 };
 
@@ -73,13 +71,13 @@ if (argCheck === false) {
 };
 
 if (pswdLength >= 3000001) {
-    console.log("Entry for length is too large, maximum number of characteros is 3000000")  
+    console.log("Entry for length is too large, maximum number of characteros is 3000000");  //larger numbers work but for performance cap is set
 }else {
     let pswdLengthNum = parseInt(pswdLength);
     for (let i=1; i<=pswdLengthNum; i++) {
         let randAlpha = "";
         let quarterChance = Math.random()*100
-        if (symbols === true && quarterChance <20) {
+        if (symbols === true && quarterChance <20) {  //Originally was going to have num and sym in 25% of char if active, but 20% looked better
             randAlpha = signs[Math.floor(Math.random()*8)]; 
         }else if (numbers === true && quarterChance>80) {
             randAlpha = digits[Math.floor(Math.random()*10)];
@@ -87,7 +85,7 @@ if (pswdLength >= 3000001) {
             randAlpha = alpha[Math.floor(Math.random()*26)];
             if (capitals == true) {
                 let fiftyFifty = Math.random()*100
-                if (fiftyFifty>50){
+                if (fiftyFifty>50){ //If caps is active, 50% of char made upper
                     randAlpha = randAlpha.toUpperCase();
                 }
             }}
@@ -95,7 +93,7 @@ if (pswdLength >= 3000001) {
         
         
     }if (!pswd) {
-        console.log("")
+        console.log("") //This keeps the --help flag from producing a password, the only case where the field is ""
         }else {
         console.log(`Your ${pswdLength} character Password is: ${pswd}`)};
 }

@@ -1,7 +1,7 @@
 {
   "name": "qap1",
   "version": "1.0.0",
-  "description": "QAP1 FullStack ",
+  "description": "FullStack Development - Password Generator in JS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
